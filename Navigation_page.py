@@ -8,12 +8,14 @@ import ctypes
 import string
 import re
 from Insert_On_Datbase import insert_in_Local,create_filename
-
+import wx
+import html
+app = wx.App()
 
 def ChromeDriver():
-    File_Location = open("D:\\0 PYTHON EXE SQL CONNECTION & DRIVER PATH\\ok.gov\\Location For Database & Driver.txt", "r")
-    TXT_File_AllText = File_Location.read()
-    Chromedriver = str(TXT_File_AllText).partition("Driver=")[2].partition("\")")[0].strip()
+    # File_Location = open("D:\\0 PYTHON EXE SQL CONNECTION & DRIVER PATH\\ok.gov\\Location For Database & Driver.txt", "r")
+    # TXT_File_AllText = File_Location.read()
+    # Chromedriver = str(TXT_File_AllText).partition("Driver=")[2].partition("\")")[0].strip()
     # chrome_options = Options()
     # chrome_options.add_extension('D:\\0 PYTHON EXE SQL CONNECTION & DRIVER PATH\\ok.gov\\Browsec-VPN.crx')  # ADD EXTENSION Browsec-VPN
     # browser = webdriver.Chrome(executable_path=str(Chromedriver),
@@ -25,20 +27,16 @@ def ChromeDriver():
     # browser.switch_to.window(browser.window_handles[1])
     # browser.close()
     # browser.switch_to.window(browser.window_handles[0])
-    browser = webdriver.Chrome(executable_path=str(Chromedriver))
+    # browser = webdriver.Chrome(executable_path=str(Chromedriver))
+    browser = webdriver.Chrome(executable_path=str(f"C:\\chromedriver.exe"))
     browser.get(
         """https://chrome.google.com/webstore/detail/browsec-vpn-free-and-unli/omghfjlpggmjjaagoclmmobgdodcjboh?hl=en" ping="/url?sa=t&amp;source=web&amp;rct=j&amp;url=https://chrome.google.com/webstore/detail/browsec-vpn-free-and-unli/omghfjlpggmjjaagoclmmobgdodcjboh%3Fhl%3Den&amp;ved=2ahUKEwivq8rjlcHmAhVtxzgGHZ-JBMgQFjAAegQIAhAB""")
-    for Add_Extension in browser.find_elements_by_xpath('/html/body/div[4]/div[2]/div/div/div[2]/div[2]/div'):
-        Add_Extension.click()
-        break
-    import wx
-    app = wx.App()
+    
     wx.MessageBox(' -_-  Add Extension and Select Proxy Between 25 SEC -_- ', 'Info', wx.OK | wx.ICON_WARNING)
     time.sleep(25)  # WAIT UNTIL CHANGE THE MANUAL VPN SETTING
     browser.get("https://www.ok.gov/dcs/solicit/app/solicitationSearch.php?status=open-pending")
-    browser.set_window_size(1024, 600)
     browser.maximize_window()
-    time.sleep(1)
+    time.sleep(3)
     href = []
     for pages in range(2, 5, 1):
         for tender_href in browser.find_elements_by_xpath('/html/body/div/div/div[3]/div[2]/div[3]/div/div/form[2]/div[4]/table/tbody//td[2]/a'):
@@ -190,9 +188,18 @@ def Scrap_data(browser, Tender_href):
                             # Source Name
                             SegFeild[31] = 'ok.gov'
 
-                            for Segdata in range(len(SegFeild)):
-                                print(Segdata, end=' ')
-                                print(SegFeild[Segdata])
+                            for SegIndex in range(len(SegFeild)):
+                                print(SegIndex, end=' ')
+                                print(SegFeild[SegIndex])
+                                SegFeild[SegIndex] = html.unescape(str(SegFeild[SegIndex]))
+                                SegFeild[SegIndex] = str(SegFeild[SegIndex]).replace("'", "''")
+
+                            if len(SegFeild[19]) >= 200:
+                                SegFeild[19] = str(SegFeild[19])[:200]+'...'
+
+                            if len(SegFeild[18]) >= 1500:
+                                SegFeild[18] = str(SegFeild[18])[:1500]+'...'
+                            
                             a = False
                             insert_in_Local(get_htmlSource , SegFeild)
                             print(" Total: " + str(Global_var.Total) + " Duplicate: " + str(
