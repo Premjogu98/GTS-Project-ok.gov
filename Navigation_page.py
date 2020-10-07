@@ -63,7 +63,7 @@ def Scrap_data(browser, Tender_href):
                         currentdate = time.strptime(date2, "%Y-%m-%d")
                         if deadline > currentdate:
                             SegFeild = []
-                            for data in range(42):
+                            for data in range(45):
                                 SegFeild.append('')
                             SegFeild[24] = date2
                             get_htmlSource = ""
@@ -187,6 +187,10 @@ def Scrap_data(browser, Tender_href):
 
                             # Source Name
                             SegFeild[31] = 'ok.gov'
+
+                            SegFeild[42] = SegFeild[7]  # project_location
+
+                            SegFeild[43] = ''  # set_aside
 
                             for SegIndex in range(len(SegFeild)):
                                 print(SegIndex, end=' ')
