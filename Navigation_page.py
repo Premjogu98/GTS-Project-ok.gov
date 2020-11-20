@@ -13,29 +13,14 @@ import html
 app = wx.App()
 
 def ChromeDriver():
-    # File_Location = open("D:\\0 PYTHON EXE SQL CONNECTION & DRIVER PATH\\ok.gov\\Location For Database & Driver.txt", "r")
-    # TXT_File_AllText = File_Location.read()
-    # Chromedriver = str(TXT_File_AllText).partition("Driver=")[2].partition("\")")[0].strip()
-    # chrome_options = Options()
-    # chrome_options.add_extension('D:\\0 PYTHON EXE SQL CONNECTION & DRIVER PATH\\ok.gov\\Browsec-VPN.crx')  # ADD EXTENSION Browsec-VPN
-    # browser = webdriver.Chrome(executable_path=str(Chromedriver),
-    #                            chrome_options=chrome_options)
-    # time.sleep(20)  # WAIT UNTIL CHANGE THE MANUAL VPN SETTING
-    # browser.get('https://www.ok.gov/dcs/solicit/app/solicitationSearch.php?status=open-pending')
-    # browser.set_window_size(1024 , 600)
-    # browser.maximize_window()
-    # browser.switch_to.window(browser.window_handles[1])
-    # browser.close()
-    # browser.switch_to.window(browser.window_handles[0])
-    # browser = webdriver.Chrome(executable_path=str(Chromedriver))
-    browser = webdriver.Chrome(executable_path=str(f"C:\\chromedriver.exe"))
-    browser.get(
-        """https://chrome.google.com/webstore/detail/browsec-vpn-free-and-unli/omghfjlpggmjjaagoclmmobgdodcjboh?hl=en" ping="/url?sa=t&amp;source=web&amp;rct=j&amp;url=https://chrome.google.com/webstore/detail/browsec-vpn-free-and-unli/omghfjlpggmjjaagoclmmobgdodcjboh%3Fhl%3Den&amp;ved=2ahUKEwivq8rjlcHmAhVtxzgGHZ-JBMgQFjAAegQIAhAB""")
-    
-    wx.MessageBox(' -_-  Add Extension and Select Proxy Between 25 SEC -_- ', 'Info', wx.OK | wx.ICON_WARNING)
-    time.sleep(25)  # WAIT UNTIL CHANGE THE MANUAL VPN SETTING
-    browser.get("https://www.ok.gov/dcs/solicit/app/solicitationSearch.php?status=open-pending")
+    chrome_options = Options()
+    chrome_options.add_extension('C:\\BrowsecVPN.crx')
+    browser = webdriver.Chrome(executable_path=str(f"C:\\chromedriver.exe"),chrome_options=chrome_options)
     browser.maximize_window()
+    # browser.get("""https://chrome.google.com/webstore/detail/browsec-vpn-free-and-unli/omghfjlpggmjjaagoclmmobgdodcjboh?hl=en" ping="/url?sa=t&amp;source=web&amp;rct=j&amp;url=https://chrome.google.com/webstore/detail/browsec-vpn-free-and-unli/omghfjlpggmjjaagoclmmobgdodcjboh%3Fhl%3Den&amp;ved=2ahUKEwivq8rjlcHmAhVtxzgGHZ-JBMgQFjAAegQIAhAB""")
+    wx.MessageBox(' -_-  Add Extension and Select Proxy Between 10 SEC -_- ', 'Info', wx.OK | wx.ICON_WARNING)
+    time.sleep(15)  # WAIT UNTIL CHANGE THE MANUAL VPN SETtING
+    browser.get("https://www.ok.gov/dcs/solicit/app/solicitationSearch.php?status=open-pending")
     time.sleep(3)
     href = []
     for pages in range(2, 5, 1):

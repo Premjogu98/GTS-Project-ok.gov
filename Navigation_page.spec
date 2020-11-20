@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['Navigation_page.py'],
-             pathex=['D:\\PycharmProjects\\ok_gov'],
+             pathex=['F:\\Office Projects\\ok_gov'],
              binaries=[],
              datas=[],
              hiddenimports=[],
@@ -30,4 +30,4 @@ exe = EXE(pyz,
           upx=True,
           upx_exclude=[],
           runtime_tmpdir=None,
-          console=True , icon='D:\\PycharmProjects\\zakup_sk_kz\\pyicon.ico')
+          console=True , icon='F:\\pyicon.ico')
